@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Symlink certain scripts to /usr/bin
+
+ln -s /home/michael/bin/volume-up-conway /usr/bin/volume-up
+ln -s /home/michael/bin/volume-down-conway /usr/bin/volume-down
+ln -s /home/michael/bin/setup-displays-conway /usr/bin/setup-displays
+ln -s /home/michael/bin/setup-sound-conway /usr/bin/setup-sound
+
