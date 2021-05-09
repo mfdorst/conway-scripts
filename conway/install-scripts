@@ -1,9 +1,20 @@
-#!/bin/bash
+#!/usr/bin/env python3
 
-# Symlink certain scripts to /usr/bin
+from subprocess import run
+from os import geteuid, symlink, path
 
-ln -s /home/michael/bin/volume-up-conway /usr/bin/volume-up
-ln -s /home/michael/bin/volume-down-conway /usr/bin/volume-down
-ln -s /home/michael/bin/setup-displays-conway /usr/bin/setup-displays
-ln -s /home/michael/bin/setup-sound-conway /usr/bin/setup-sound
+def main():
+    # We require root permissions to copy into /usr/bin
+    if geteuid() != 0:
+        exit("Root priviledges required to symlink into /usr/bin. Rerun with 'sudo'.")
+
+    # Symlink certain scripts to /usr/bin
+    dir = path.dirname(__file__)
+    symlink(f'{dir}/volume-up', '/usr/bin/volume-up')
+    symlink(f'{dir}/volume-down', '/usr/bin/volume-down')
+    symlink(f'{dir}/setup-displays', '/usr/bin/setup-displays')
+    symlink(f'{dir}/setup-sound', '/usr/bin/setup-sound')
+
+if __name__ == "__main__":
+    main()
 
